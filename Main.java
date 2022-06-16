@@ -18,7 +18,7 @@ public class Main {
         try {
             while (true) {
                 if (canNext) {
-                    System.out.print("Выберите действие (save, upload out): ");
+                    System.out.print("Выберите действие (save, upload, out): ");
                 }
                 String i = in.next();
 
