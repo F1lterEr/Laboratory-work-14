@@ -11,7 +11,6 @@ class Geometry implements Serializable{
         result = x - Math.sin(Math.toRadians(x));
     }
 }
-
 public class Main {
     public static void main(String[] args) throws Exception {
         Scanner in = new Scanner(System.in);
@@ -19,7 +18,7 @@ public class Main {
         try {
             while (true) {
                 if (canNext) {
-                    System.out.print("Выберите действие (save, check, out): ");
+                    System.out.print("Выберите действие (save, upload out): ");
                 }
                 String i = in.next();
 
@@ -33,13 +32,17 @@ public class Main {
                     g.getSin(g.x);
                     output.writeObject(g);
                     System.out.println("Данные сохранены.");
-                } else if (i.equalsIgnoreCase("check")) {
+                    file.close();
+                    output.close();
+                } else if (i.equalsIgnoreCase("upload")) {
                     canNext = true;
                     try {
                         FileInputStream file1 = new FileInputStream("input.txt");
                         ObjectInputStream input = new ObjectInputStream(file1);
                         Geometry gg = (Geometry) input.readObject();
                         System.out.printf("X = %s \t Result = %s\n", gg.x, gg.result);
+                        file1.close();
+                        input.close();
                     } catch (IOException ex) {
                         System.out.println(ex.getMessage());
                     }
@@ -47,7 +50,7 @@ public class Main {
                     break;
                 } else if (canNext) {
                     System.out.println("Я не знаю такой команды.");
-                    System.out.print("Выберите действие (save, check, out): ");
+                    System.out.print("Выберите действие (save, upload, out): ");
                     canNext = false;
                 }
             }
